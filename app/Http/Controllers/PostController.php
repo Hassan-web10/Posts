@@ -25,7 +25,7 @@ class PostController extends Controller
     {
 
 
-        $posts = Post::withCount('comment')->simplePaginate(4);
+        $posts = Post::withCount('comment')->where('user_id',Auth::id())->simplePaginate(4);
         return view('pages.index', compact('posts'));
     }
 
@@ -77,7 +77,7 @@ $post=new Post();
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::where('user_id',Auth::id())->findOrFail($id);
         return view('pages.edit', compact('post'));
     }
 
