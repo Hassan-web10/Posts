@@ -65,7 +65,7 @@ $post=new Post();
     public function show($id)
     {
 
-        $post = Post::withCount('comment')->findOrFail($id);
+        $post = Post::withCount('comment')->where('user_id',Auth::id())->findOrFail($id);
         return view('pages.show', compact('post'));
     }
 
